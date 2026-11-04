@@ -2,7 +2,7 @@ backend:
   name: github
   repo: china355/valaxy-blog
   branch: main
-  base_url: https://你的Worker地址.workers.dev
+  base_url: https://decap-oauth-xiutu.1023972205.workers.dev
   auth_endpoint: auth
 
 media_folder: "public/images/uploads"
