@@ -22,7 +22,7 @@ const contacts: Contact[] = [
     subtitle: '橘光光 · 冰岛',
     account: '橘光光',
     accountLabel: '微信昵称',
-    qr: '/qrcode/wechat.jpg',
+    qr: '/qrcode/wechat-card.jpg',
     qrNote: '扫码加好友',
     link: '',
     linkText: '',
@@ -34,7 +34,7 @@ const contacts: Contact[] = [
     subtitle: '阿光不懒',
     account: '1023972205',
     accountLabel: 'QQ 号',
-    qr: '/qrcode/qq.jpg',
+    qr: '/qrcode/qq-card.jpg',
     qrNote: '扫码加好友',
     link: '',
     linkText: '',
@@ -46,7 +46,7 @@ const contacts: Contact[] = [
     subtitle: '睡个懒觉',
     account: '54008837196',
     accountLabel: '抖音号',
-    qr: '/qrcode/douyin.jpg',
+    qr: '/qrcode/douyin-card.jpg',
     qrNote: '扫码关注',
     link: '',
     linkText: '',
@@ -195,9 +195,11 @@ function copyAccount() {
   cursor: pointer;
 }
 .contact-qr img {
-  max-width: 220px;
+  display: block;
+  max-width: 240px;
   width: 100%;
-  border-radius: 12px;
+  margin: 0 auto;
+  border-radius: 16px;
 }
 .contact-qr-placeholder {
   border: 2px dashed #ccc;
