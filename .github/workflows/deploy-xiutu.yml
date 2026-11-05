@@ -1,0 +1,45 @@
+# Auto-deploy to xiutu.site: every push to main (including Decap /admin posts)
+# builds the blog and syncs dist/ to the server. Existing gh-pages.yml is
+# left untouched and keeps running in parallel.
+# Secrets (repository secrets, never in chat or in the repo):
+#   DEPLOY_SSH_KEY - private key of the dedicated deploy keypair (user: deploy)
+#   DEPLOY_USER    - server account holding the matching public key
+# Server scope: only /var/www/xiutu.site is synced (rsync --delete), only
+# that directory gets chmod -R a+rX, nginx is only tested and reloaded.
+
+name: Deploy to xiutu.site
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm i
+      - name: Build Valaxy blog
+        run: npm run build
+      - name: Set up deploy SSH key
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p 22 120.46.175.101 >> ~/.ssh/known_hosts
+      - name: Sync dist to server
+        run: |
+          rsync -avz --delete -e "ssh -p 22 -i ~/.ssh/deploy_key" dist/ "${{ secrets.DEPLOY_USER }}"@120.46.175.101:/var/www/xiutu.site/
+      - name: Fix permissions and reload nginx
+        # deploy has passwordless sudo ONLY for these two commands (see /etc/sudoers.d/deploy-nginx
+        # on the server: /usr/sbin/nginx -t and /usr/bin/systemctl reload nginx). Use sudo with
+        # full paths, otherwise reload fails as a non-root user.
+        run: |
+          ssh -p 22 -i ~/.ssh/deploy_key "${{ secrets.DEPLOY_USER }}"@120.46.175.101 \
+            'chmod -R a+rX /var/www/xiutu.site && sudo /usr/sbin/nginx -t && sudo /usr/bin/systemctl reload nginx'
