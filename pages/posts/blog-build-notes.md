@@ -1,7 +1,7 @@
 ---
 title: 博客是怎么搭起来的：思路、技术和踩过的坑
 date: 2026-11-05
-categories: 生活
+categories: 项目
 tags:
   - 博客
   - Valaxy

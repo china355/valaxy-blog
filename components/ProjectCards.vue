@@ -45,6 +45,22 @@ const projects: Project[] = [
     demo: 'http://120.46.175.101/',
     status: 'MVP 已上线',
   },
+  {
+    name: 'yang 的小站',
+    subtitle: '个人博客 · Valaxy + Yun 静态站',
+    desc: '自己的个人博客：展示项目、歌单和联系方式的静态站，文章用 Markdown 写，构建后生成网页，不用数据库和后端。',
+    stack: ['Vue 3', 'Valaxy', 'Yun', 'Decap CMS', 'Cloudflare Worker', 'Nginx'],
+    features: [
+      '纯静态部署：构建产物直接由 nginx 提供访问，和去水印工具共用一台服务器、分站点互不影响',
+      '浏览器写文章：打开 /admin 登录后就能写文章、发文章，文章以 Markdown 提交到仓库',
+      '内容都在站里：项目页、歌单页、联系方式都在首页和导航里直接展示',
+      '搭建过程有记录：《博客是怎么搭起来的：思路、技术和踩过的坑》写了选型、部署和踩过的坑',
+    ],
+    repo: 'https://github.com/china355/valaxy-blog',
+    repoLabel: 'china355/valaxy-blog',
+    demo: 'https://xiutu.site',
+    status: '已上线',
+  },
 ]
 </script>
 
