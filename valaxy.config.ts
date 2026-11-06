@@ -54,7 +54,9 @@ export default defineValaxyConfig<UserThemeConfig>({
     footer: {
       since: 2026,
       beian: {
-        enable: false,
+        enable: true,
+        icp: '豫ICP备2026054782号-1',
+        icpLink: 'https://beian.miit.gov.cn/',
       },
     },
   },
